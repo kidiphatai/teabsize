@@ -139,7 +139,7 @@ img{max-width:100%}
     <div id="below"></div>
   </section>
   <details class="how"><summary>วิธีเล่น</summary>
-    <p>รูปสีดำคือของอ้างอิง วาดตามขนาดจริง และมีตัวเลขบอกขนาด รูปสีขาวคือของที่ต้องทาย ลากซ้ายขวาบนกระดาน (หรือกด + − หรือปุ่มลูกศร) ปรับให้ใหญ่เท่าที่คิดว่าจริง แล้วกดล็อกคำตอบ</p>
+    <p>รูปซ้ายคือของอ้างอิง วาดตามสัดส่วนจริง รูปขวาที่มีขอบคือของที่ต้องทาย ลากซ้ายขวาบนกระดาน (หรือกด + − หรือปุ่มลูกศร) ปรับให้ใหญ่เท่าที่คิดว่าจริงเมื่อเทียบกับรูปซ้าย แล้วกดล็อกคำตอบ ระหว่างเล่นไม่มีตัวเลขบอก ใช้ตากะล้วน ๆ ตัวเลขจริงจะโผล่ตอนเฉลย</p>
     <p>คลาดไม่เกิน 6% ได้ 100 คะแนน คลาดครึ่งหนึ่งหรือสองเท่าได้ 45 สามเท่าได้ 30 ห้าเท่าขึ้นไปได้ 0 ทายเล็กหรือใหญ่เกินโดนหักเท่ากัน</p>
     <p>ขนาดทุกชิ้นเป็นค่าจริงจากข้อมูลอ้างอิง สัตว์ใช้ค่าทั่วไปของตัวเต็มวัย ของใช้และลูกบอลใช้ขนาดตามมาตรฐาน ตอนเฉลยจะบอกที่มาของตัวเลขทุกข้อ</p>
     <p>โหมดออนไลน์: สร้างห้องแล้วส่งรหัสให้เพื่อน ทุกข้อต้องรอทุกคนล็อกคำตอบก่อน แล้วจะเฉลยพร้อมกันและเทียบคะแนนทุกคนทีละข้อ</p>
@@ -209,7 +209,108 @@ const ITEMS = [
  ["ภูเขาไฟฟูจิ","🗻","H",3776,"สูง 3,776 ม. จากระดับน้ำทะเล"],
  ["ดวงจันทร์","🌕","D",3474800,"เส้นผ่านศูนย์กลาง 3,474.8 กม. (NASA)"],
  ["โลก","🌏","D",12742000,"เส้นผ่านศูนย์กลางเฉลี่ย 12,742 กม."],
- ["มอเตอร์ไซค์","🏍️","L",1.9,"รถครอบครัว เช่น ฮอนด้า เวฟ ยาวราว 1.9 ม."]
+ ["มอเตอร์ไซค์","🏍️","L",1.9,"รถครอบครัว เช่น ฮอนด้า เวฟ ยาวราว 1.9 ม."],
+ // --- ชุดเพิ่ม 100 ชิ้น ---
+ ["เสือโคร่งเบงกอลตัวผู้ (รวมหาง)","🐅","L",2.9,"ตัวผู้ยาวรวมหาง 2.7–3.1 ม."],
+ ["เสือดาว (รวมหาง)","🐆","L",2,"ลำตัว 0.9–1.9 ม. หาง 0.6–1 ม. รวมราว 2 ม."],
+ ["ไบซันอเมริกันตัวผู้","🦬","L",3.3,"ตัวผู้ยาวลำตัว 3–3.8 ม."],
+ ["ควายบ้าน","🐃","L",2.7,"ลำตัวยาว 2.4–3 ม."],
+ ["แกะ","🐏","L",1.4,"แกะโตเต็มวัยยาว 1.2–1.8 ม."],
+ ["แพะบ้าน","🐐","L",1.2,"แพะบ้านยาวลำตัว 1–1.4 ม."],
+ ["ลามะ","🦙","H",1.75,"สูงถึงหัว 1.7–1.8 ม."],
+ ["กวางเรนเดียร์","🦌","L",1.9,"ยาวลำตัว 1.6–2.1 ม."],
+ ["แมมมอธขนยาว","🦣","H",3.2,"สูงที่ไหล่ 2.7–3.4 ม. (ประเมินจากฟอสซิล)"],
+ ["กระรอกเทา (รวมหาง)","🐿️","L",0.45,"ยาวรวมหาง 38–52 ซม."],
+ ["เม่นแคระยุโรป","🦔","L",0.22,"ยาว 15–30 ซม."],
+ ["นากใหญ่ขนเรียบ (รวมหาง)","🦦","L",1.1,"ยาวรวมหาง 1–1.3 ม."],
+ ["สกังก์ลาย (รวมหาง)","🦨","L",0.68,"ยาวรวมหาง 57–80 ซม."],
+ ["แบดเจอร์ยุโรป","🦡","L",0.8,"ยาวลำตัว 60–90 ซม."],
+ ["หนูท่อ (รวมหาง)","🐀","L",0.43,"ลำตัว 20–25 ซม. หาง 18–25 ซม."],
+ ["ตุ๊กแกบ้าน","🦎","L",0.3,"ยาวรวมหาง 25–35 ซม."],
+ ["แมงป่องช้าง","🦂","L",0.12,"ยาว 10–15 ซม."],
+ ["จิ้งหรีดทองดำ","🦗","L",0.027,"ยาว 2.5–3 ซม."],
+ ["เต่าทองเจ็ดจุด","🐞","H",0.007,"ยาว 5–8 มม."],
+ ["แมลงวันบ้าน","🪰","L",0.007,"ยาว 6–7 มม."],
+ ["ยุงลาย","🦟","L",0.005,"ยาวราว 4–7 มม."],
+ ["แมลงสาบอเมริกัน","🪳","H",0.038,"ยาว 3.5–4 ซม."],
+ ["ปูทะเล (กว้างรวมก้าม)","🦀","D",0.2,"กระดองกว้าง 15–20 ซม."],
+ ["กุ้งมังกรอเมริกัน (ล็อบสเตอร์)","🦞","H",0.3,"ที่ขายทั่วไปยาว 25–35 ซม."],
+ ["นกฮูกเขาควาย","🦉","H",0.55,"ยาว 46–63 ซม."],
+ ["นกฟลามิงโกใหญ่","🦩","H",1.3,"สูง 1.1–1.5 ม."],
+ ["ยีราฟแรกเกิด","🦒","H",1.8,"ลูกยีราฟแรกเกิดสูงราว 1.8 ม."],
+ ["นกมาคอว์สีแดง (รวมหาง)","🦜","H",0.85,"ยาวรวมหาง 81–96 ซม."],
+ ["หงส์ขาว","🦢","L",1.5,"ยาว 1.25–1.7 ม."],
+ ["เป็ดมัลลาร์ด","🦆","L",0.58,"ยาว 50–65 ซม."],
+ ["นกโดโด","🦤","H",1,"สูงราว 1 ม. (สูญพันธุ์แล้ว)"],
+ ["อูฐหนอกเดียว","🐪","H",2.1,"สูงถึงยอดหนอกราว 2–2.2 ม."],
+ ["บีเวอร์ (รวมหาง)","🦫","L",1.05,"ยาวรวมหาง 0.9–1.2 ม."],
+ ["อุรังอุตังตัวผู้","🦧","H",1.37,"ยืนสูง 1.2–1.5 ม."],
+ ["ช้างเอเชีย","🐘","H",2.7,"สูงที่ไหล่ 2.5–3 ม."],
+ ["วาฬบรูด้า (พบในอ่าวไทย)","🐋","L",13,"ตัวเต็มวัยยาว 12–15 ม."],
+ ["โลมาอิรวดี","🐬","L",2.3,"ยาว 2–2.75 ม."],
+ ["ฉลามวาฬ","🦈","L",10,"ตัวเต็มวัยทั่วไปยาว 8–12 ม."],
+ ["แท็กซี่ (โตโยต้า โคโรลล่า อัลติส)","🚕","L",4.63,"ยาว 4.63 ม."],
+ ["รถตู้ (โตโยต้า คอมมิวเตอร์)","🚐","L",5.38,"ยาว 5.38 ม."],
+ ["รถ SUV (โตโยต้า ฟอร์จูนเนอร์)","🚙","L",4.8,"ยาวราว 4.8 ม."],
+ ["รถกระบะ 4 ประตู (ไฮลักซ์ รีโว่)","🛻","L",5.33,"ยาว 5.33 ม."],
+ ["รถฟอร์มูลาวัน","🏎️","L",5.6,"รถ F1 ยุคปัจจุบันยาวราว 5.6 ม."],
+ ["สกู๊ตเตอร์ (ฮอนด้า สกู๊ปปี้)","🛵","L",1.86,"ยาว 1.86 ม."],
+ ["สกู๊ตเตอร์ไฟฟ้า","🛴","L",1.08,"รุ่นยอดนิยมอย่าง Xiaomi ยาว 1.08 ม."],
+ ["ยางรถเก๋ง ขอบ 15 นิ้ว","🛞","D",0.63,"ยางรถเก๋งทั่วไปกว้างราว 60–65 ซม."],
+ ["เฮลิคอปเตอร์แบล็กฮอว์ก","🚁","L",19.8,"ยาวรวมใบพัด 19.8 ม."],
+ ["เรือไททานิก","🚢","L",269,"ยาว 269 ม."],
+ ["เรือแคนูสองที่นั่ง","🛶","L",4.9,"ยาว 4.5–5.2 ม."],
+ ["รูปปั้นโมอาย เกาะอีสเตอร์","🗿","H",4,"สูงเฉลี่ยราว 4 ม."],
+ ["ชิงช้าสวรรค์ลอนดอนอาย","🎡","H",135,"สูง 135 ม."],
+ ["กะอ์บะฮ์ นครมักกะฮ์","🕋","H",13.1,"สูงราว 13.1 ม."],
+ ["ไข่นกกระจอกเทศ","🥚","H",0.15,"ไข่ที่ใหญ่ที่สุดในโลก ยาวราว 15 ซม."],
+ ["ต้นเรดวูดไฮเปอเรียน","🌲","H",116,"ต้นไม้ที่สูงที่สุดในโลกที่วัดได้ ราว 116 ม."],
+ ["แคนตาลูป","🍈","D",0.15,"กว้าง 13–17 ซม."],
+ ["ส้ม","🍊","D",0.075,"กว้าง 7–8 ซม."],
+ ["เลมอน","🍋","L",0.08,"ยาว 7–9 ซม."],
+ ["กล้วยหอม","🍌","L",0.2,"ยาว 18–22 ซม."],
+ ["ลูกแพร์","🍐","H",0.1,"สูง 9–11 ซม."],
+ ["ลูกพีช","🍑","D",0.07,"กว้าง 6–8 ซม."],
+ ["สตรอว์เบอร์รี","🍓","H",0.035,"ยาว 3–4 ซม."],
+ ["มะเขือเทศ","🍅","D",0.07,"ลูกขนาดกลางกว้าง 6–8 ซม."],
+ ["อะโวคาโดพันธุ์แฮสส์","🥑","H",0.1,"ยาว 8–12 ซม."],
+ ["มันฝรั่ง","🥔","L",0.09,"หัวขนาดกลางยาว 8–10 ซม."],
+ ["หอมใหญ่","🧅","D",0.08,"กว้าง 7–9 ซม."],
+ ["มะม่วงน้ำดอกไม้","🥭","L",0.13,"ยาว 12–15 ซม."],
+ ["โดนัท","🍩","D",0.085,"กว้างราว 8–9 ซม."],
+ ["อ่างอาบน้ำ","🛁","L",1.7,"ขนาดมาตรฐานยาว 1.5–1.7 ม."],
+ ["ชักโครก (รวมถังพักน้ำ)","🚽","H",0.78,"สูง 75–80 ซม."],
+ ["โซฟา 3 ที่นั่ง","🛋️","L",2,"ยาว 1.9–2.2 ม."],
+ ["กระเป๋าเดินทางขึ้นเครื่อง","🧳","H",0.55,"สายการบินส่วนใหญ่กำหนดสูงไม่เกิน 55–56 ซม."],
+ ["กระเป๋าเป้","🎒","H",0.45,"เป้ทั่วไปสูง 40–50 ซม."],
+ ["รองเท้าผ้าใบผู้ชาย (เบอร์ 42)","👟","L",0.29,"ยาวรวมพื้นราว 28–29 ซม."],
+ ["หลอดไฟ","💡","H",0.108,"หลอดทรง A60 สูงราว 10.5–11 ซม."],
+ ["แล็ปท็อป 14 นิ้ว","💻","L",0.32,"กว้างราว 31–32 ซม."],
+ ["จอคอม 24 นิ้ว","🖥️","L",0.54,"จอ 16:9 กว้างราว 53–54 ซม."],
+ ["คีย์บอร์ดเต็มขนาด","⌨️","L",0.44,"ยาวราว 44 ซม."],
+ ["เมาส์คอมพิวเตอร์","🖱️","L",0.12,"ยาว 11–12 ซม."],
+ ["จอยเกม PS5","🎮","L",0.16,"DualSense กว้าง 16 ซม."],
+ ["ทีวี 55 นิ้ว","📺","L",1.23,"กว้างราว 1.23 ม."],
+ ["ลูกวอลเลย์บอล","🏐","D",0.21,"เส้นรอบวง 65–67 ซม."],
+ ["ลูกพูล (บิลเลียด)","🎱","D",0.057,"มาตรฐาน 57.15 มม."],
+ ["จานร่อน","🥏","D",0.275,"จานร่อนอัลติเมตมาตรฐาน 27.5 ซม."],
+ ["ถังดับเพลิง 15 ปอนด์","🧯","H",0.5,"สูงราว 50 ซม."],
+ ["ถังน้ำมัน 200 ลิตร","🛢️","H",0.88,"สูงราว 88 ซม."],
+ ["สมองมนุษย์","🧠","L",0.167,"สมองผู้ใหญ่ยาวราว 16.7 ซม."],
+ ["หัวใจมนุษย์","🫀","H",0.12,"หัวใจผู้ใหญ่ยาวราว 12 ซม."],
+ ["เหรียญ 10 บาท","🪙","D",0.026,"เส้นผ่านศูนย์กลาง 26 มม."],
+ ["ธนบัตรดอลลาร์สหรัฐ","💵","L",0.156,"ยาว 156 มม."],
+ ["ฟลอปปีดิสก์ 3.5 นิ้ว","💾","L",0.09,"ขนาด 90 × 94 มม."],
+ ["สมุดขนาด A5","📓","H",0.21,"สูง 210 มม."],
+ ["กระดาษ A4","📄","H",0.297,"สูง 297 มม."],
+ ["ซองจดหมาย DL","✉️","L",0.22,"ยาว 220 มม."],
+ ["กระดาษชำระม้วน","🧻","H",0.1,"สูงราว 10 ซม."],
+ ["ลูกเต๋า","🎲","D",0.016,"ลูกเต๋ามาตรฐาน 16 มม."],
+ ["โยโย่","🪀","D",0.056,"กว้างราว 5.6 ซม."],
+ ["รถเข็นซูเปอร์มาร์เก็ต","🛒","L",0.95,"ยาว 90–100 ซม."],
+ ["กระดานปาเป้า","🎯","D",0.451,"มาตรฐาน 45.1 ซม."],
+ ["อิฐมาตรฐานสากล","🧱","L",0.215,"อิฐมาตรฐานอังกฤษยาว 215 มม."],
+ ["หินเคิร์ลลิง","🥌","D",0.29,"เส้นรอบวงไม่เกิน 91.4 ซม. กว้างราว 29 ซม."]
 ];
 const DIMWORD = {L:"ยาว", H:"สูง", D:"กว้าง"};
 
@@ -258,7 +359,7 @@ function decodeChallenge(h){
   const m = /^c\.(\d{1,2})\.([0-9a-z]{1,8})\.([0-9a-z]*)\.([0-9a-f]*)$/.exec(h || "");
   if(!m) return null;
   const n = +m[1], seed = parseInt(m[2],36);
-  if(![5,10].includes(n) || m[3].length !== n*2 || m[4].length % 2) return null;
+  if(![5,10,20].includes(n) || m[3].length !== n*2 || m[4].length % 2) return null;
   const scores = []; for(let i=0;i<n;i++){ const s = parseInt(m[3].slice(i*2,i*2+2),36); if(!(s>=0 && s<=100)) return null; scores.push(s) }
   let name = "";
   try{ name = new TextDecoder("utf-8",{fatal:true}).decode(new Uint8Array(m[4].match(/../g)?.map(x => parseInt(x,16)) || [])) }catch(e){ name = "" }
@@ -273,26 +374,42 @@ function randSeed(){ return 1 + Math.floor(Math.random() * 2e9) }
 const silCache = new Map();
 function silhouette(emoji){
   if(silCache.has(emoji)) return silCache.get(emoji);
-  if(emoji==="●"){ const m = document.createElement("canvas"); m.width = m.height = 200; const x = m.getContext("2d"); x.fillStyle = "#000"; x.beginPath(); x.arc(100,100,100,0,Math.PI*2); x.fill(); const o = {mask:m, aspect:1, tints:new Map()}; silCache.set(emoji,o); return o }
-  const S = 320, c = document.createElement("canvas"); c.width = c.height = S;
+  if(emoji==="●"){ // tennis ball drawn by hand: some platforms put a racket in the emoji
+    const m = document.createElement("canvas"); m.width = m.height = 300; const x = m.getContext("2d");
+    x.fillStyle = "#000"; x.beginPath(); x.arc(150,150,150,0,Math.PI*2); x.fill();
+    const img = document.createElement("canvas"); img.width = img.height = 300; const y = img.getContext("2d");
+    const gr = y.createRadialGradient(110,100,20,150,150,150); gr.addColorStop(0,"#E9F56A"); gr.addColorStop(1,"#B5CC1F");
+    y.fillStyle = gr; y.beginPath(); y.arc(150,150,149,0,Math.PI*2); y.fill();
+    y.save(); y.beginPath(); y.arc(150,150,149,0,Math.PI*2); y.clip();
+    y.strokeStyle = "#FFFFFF"; y.lineWidth = 12;
+    y.beginPath(); y.arc(-10,150,125,-Math.PI/2.6,Math.PI/2.6); y.stroke();
+    y.beginPath(); y.arc(310,150,125,Math.PI-Math.PI/2.6,Math.PI+Math.PI/2.6); y.stroke(); y.restore();
+    const o = {mask:m, img, aspect:1, tints:new Map()}; silCache.set(emoji,o); return o;
+  }
+  const S = 512, c = document.createElement("canvas"); c.width = c.height = S;
   const x = c.getContext("2d", {willReadFrequently:true});
-  x.font = `230px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
-  x.textAlign = "center"; x.textBaseline = "middle"; x.fillText(emoji, S/2, S/2 + 10);
+  x.font = `380px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+  x.textAlign = "center"; x.textBaseline = "middle"; x.fillText(emoji, S/2, S/2 + 16);
   const d = x.getImageData(0,0,S,S).data;
   let x0=S, y0=S, x1=-1, y1=-1;
   for(let y=0;y<S;y++) for(let i=0;i<S;i++){ if(d[(y*S+i)*4+3] > 60){ if(i<x0)x0=i; if(i>x1)x1=i; if(y<y0)y0=y; if(y>y1)y1=y } }
-  let mask;
+  let mask, img;
   if(x1 < 0){ // emoji did not render: fall back to a rounded block
     mask = document.createElement("canvas"); mask.width = 200; mask.height = 120;
     const m = mask.getContext("2d"); m.fillStyle = "#000"; m.beginPath(); m.roundRect ? m.roundRect(0,0,200,120,30) : m.rect(0,0,200,120); m.fill();
+    img = document.createElement("canvas"); img.width = 200; img.height = 120;
+    const g = img.getContext("2d"); g.fillStyle = "#9AA8A3"; g.beginPath(); g.roundRect ? g.roundRect(0,0,200,120,30) : g.rect(0,0,200,120); g.fill();
   } else {
-    mask = document.createElement("canvas"); mask.width = x1-x0+1; mask.height = y1-y0+1;
-    const m = mask.getContext("2d"); m.drawImage(c, x0, y0, mask.width, mask.height, 0, 0, mask.width, mask.height);
-    const id = m.getImageData(0,0,mask.width,mask.height), p = id.data;
+    const w = x1-x0+1, h = y1-y0+1;
+    img = document.createElement("canvas"); img.width = w; img.height = h;
+    img.getContext("2d").drawImage(c, x0, y0, w, h, 0, 0, w, h);
+    mask = document.createElement("canvas"); mask.width = w; mask.height = h;
+    const m = mask.getContext("2d"); m.drawImage(img, 0, 0);
+    const id = m.getImageData(0,0,w,h), p = id.data;
     for(let i=3;i<p.length;i+=4) p[i] = p[i] > 60 ? 255 : 0;
     m.putImageData(id,0,0);
   }
-  const out = {mask, aspect: mask.height / mask.width, tints: new Map()};
+  const out = {mask, img, aspect: mask.height / mask.width, tints: new Map()};
   silCache.set(emoji, out); return out;
 }
 function tinted(sil, color){
@@ -310,7 +427,7 @@ function dims(item, size){
 // phase: play (dragging) | wait (locked, online only) | reveal | end
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 let challenge = decodeChallenge(location.hash.slice(1));
-let roundsPref = +(sget("ts_rounds") || 5); if(![5,10].includes(roundsPref)) roundsPref = 5;
+let roundsPref = +(sget("ts_rounds") || 5); if(![5,10,20].includes(roundsPref)) roundsPref = 5;
 let mode = challenge ? "solo" : (sget("ts_room","sessionStorage") ? "online" : "solo");
 let game = null;
 function blankGame(seed, n){ return {seed, n, pairs: makePairs(seed, n), i: -1, guess: 0, scores: [], guesses: [], phase: "play", revealStart: 0, noGuess: false} }
@@ -364,16 +481,30 @@ function vbracket(x, y0, y1, label, color){
   const W = cv.clientWidth, tw = ctx.measureText(label).width;
   ctx.fillText(label, Math.max(6, Math.min(W - tw - 6, x - tw/2)), Math.max(16, y0 - 6));
 }
-function drawSil(item, size, x, ground, s, color, outline, alpha){
+// opts: {photo: draw the full-colour picture, tint: flat colour instead, outline: rim colour, rim: rim width, alpha, shadow}
+function drawSil(item, size, x, ground, s, opts){
   const sil = silhouette(item[1]), d = dims(item, size), w = d.w*s, h = d.h*s;
-  ctx.save(); ctx.globalAlpha = alpha ?? 1;
-  if(outline){
-    const o = tinted(sil, outline);
-    for(const [dx,dy] of [[-2,0],[2,0],[0,-2],[0,2],[-1.5,-1.5],[1.5,1.5],[-1.5,1.5],[1.5,-1.5]]) ctx.drawImage(o, x+dx, ground-h+dy, w, h);
+  ctx.save(); ctx.globalAlpha = opts.alpha ?? 1;
+  if(opts.shadow && w > 6){
+    ctx.fillStyle = "rgba(16,32,28,.16)"; ctx.beginPath();
+    ctx.ellipse(x + w/2, ground + 1, w/2 * 0.95, Math.max(2, Math.min(9, w*0.06)), 0, 0, Math.PI*2); ctx.fill();
   }
-  ctx.drawImage(tinted(sil, color), x, ground-h, w, h);
+  if(opts.outline){
+    const o = tinted(sil, opts.outline), r = opts.rim || 2;
+    for(let k=0;k<12;k++){ const a = k/12*Math.PI*2; ctx.drawImage(o, x + Math.cos(a)*r, ground-h + Math.sin(a)*r, w, h) }
+  }
+  ctx.imageSmoothingQuality = "high";
+  ctx.drawImage(opts.photo ? sil.img : tinted(sil, opts.tint), x, ground-h, w, h);
   ctx.restore();
   return {w, h};
+}
+function nameTag(text, cx, y, color, bg){
+  ctx.font = LABEL_FONT; ctx.textBaseline = "middle";
+  const W = cv.clientWidth, tw = ctx.measureText(text).width, pw = tw + 16, ph = 24;
+  const x = Math.max(6, Math.min(W - pw - 6, cx - pw/2)), yy = Math.max(4, y - ph);
+  ctx.fillStyle = bg; ctx.strokeStyle = color; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.roundRect ? ctx.roundRect(x, yy, pw, ph, 12) : ctx.rect(x, yy, pw, ph); ctx.fill(); ctx.stroke();
+  ctx.fillStyle = color; ctx.fillText(text, x + 8, yy + ph/2 + 1);
 }
 function frame(now){
   requestAnimationFrame(frame);
@@ -392,7 +523,7 @@ function frame(now){
   let rt = 0;
   if(revealing){ const t = reduceMotion ? 1 : Math.min(1, (now - game.revealStart) / 900); rt = 1 - Math.pow(1-t, 3) }
   const truthShown = revealing ? Math.exp(Math.log(from) + (Math.log(B[3]) - Math.log(from)) * rt) : null;
-  const ground = H - 58, top = 52, gap = 30, margin = 22;
+  const ground = H - 58, top = revealing ? 84 : 52, gap = 30, margin = 22;
   const dA = dims(A, A[3]), dG = showGuess ? dims(B, game.guess) : {w:0,h:0}, dT = revealing ? dims(B, B[3]) : {w:0,h:0};
   const rightW = Math.max(dG.w, dT.w), rightH = Math.max(dG.h, dT.h);
   const target = Math.min((W - 2*margin - gap) / (dA.w + rightW), (ground - top) / Math.max(dA.h, rightH));
@@ -401,29 +532,34 @@ function frame(now){
   const total = (dA.w + rightW) * s + gap, xA = (W - total) / 2, xB = xA + dA.w*s + gap;
 
   ctx.strokeStyle = ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(0, ground+1); ctx.lineTo(W, ground+1); ctx.stroke();
-  const ra = drawSil(A, A[3], xA, ground, s, ink, null, 1);
-  const g = showGuess ? drawSil(B, game.guess, xB, ground, s, cssVars.guess, ink, 1) : {w:0,h:0};
-  if(truthShown){
-    const tr = drawSil(B, truthShown, xB, ground, s, cssVars.truth, null, showGuess ? 0.62 : 0.9);
-    if(rt > 0.98){
-      if(B[2]==="H") vbracket(xB + tr.w + 12, ground - tr.h, ground, "จริง " + fmtLen(B[3]), cssVars.truth);
-      else bracket(xB, xB + tr.w, ground - Math.max(tr.h, g.h) - 14, "จริง " + fmtLen(B[3]), cssVars.truth);
-    }
+  // reference: the real picture at true scale; no numbers until the reveal
+  const ra = drawSil(A, A[3], xA, ground, s, {photo:true, shadow:true});
+  let g = {w:0, h:0};
+  if(!revealing) g = drawSil(B, game.guess, xB, ground, s, {photo:true, shadow:true, outline: game.phase==="wait" ? cssVars.truth : ink, rim: 2.5});
+  else if(showGuess) g = drawSil(B, game.guess, xB, ground, s, {tint: ink, alpha: 0.18});
+  let tr = null;
+  if(truthShown) tr = drawSil(B, truthShown, xB, ground, s, {photo:true, shadow:true, outline: cssVars.truth, rim: 3});
+  if(revealing && showGuess && g.w){ // dashed outline where the guess was
+    ctx.save(); ctx.setLineDash([6,5]); ctx.strokeStyle = ink; ctx.lineWidth = 1.5; ctx.globalAlpha = .55;
+    ctx.strokeRect(xB, ground - g.h, g.w, g.h); ctx.restore();
   }
-  const refLabel = A[0] + " · " + DIMWORD[A[2]] + " " + fmtLen(A[3]);
-  if(A[2]==="H") vbracket(Math.max(14, xA - 12), ground - ra.h, ground, refLabel, ink);
-  else bracket(xA, xA + ra.w, ground - ra.h - 14, refLabel, ink, ra.w < 60 ? "left" : "mid");
-  if(!revealing){
-    ctx.font = LABEL_FONT; ctx.fillStyle = ink; ctx.textBaseline = "bottom";
-    const lab = B[0] + (game.phase==="wait" ? " (ล็อกแล้ว)" : " ?"), tw = ctx.measureText(lab).width;
-    ctx.fillText(lab, Math.max(6, Math.min(W - tw - 6, xB + g.w/2 - tw/2)), Math.max(18, ground - g.h - 10));
+  const reveal = revealing && rt > 0.98;
+  nameTag(reveal ? A[0] + " · " + fmtLen(A[3]) : A[0], xA + ra.w/2, ground - ra.h - 8, ink, cssVars.board);
+  if(!revealing) nameTag(B[0] + (game.phase==="wait" ? " · ล็อกแล้ว" : " ?"), xB + g.w/2, ground - g.h - 8, game.phase==="wait" ? cssVars.truth : ink, cssVars.board);
+  else if(reveal && tr){
+    const topY = ground - Math.max(tr.h, g.h) - 8, cx = xB + Math.max(tr.w, g.w)/2;
+    nameTag("จริง " + fmtLen(B[3]), cx, topY, cssVars.truth, cssVars.board);
+    if(showGuess) nameTag("คุณทาย " + fmtLen(game.guess), cx, topY - 30, ink, cssVars.board);
   }
-  const L = niceLen((W*0.28) / s), px = L * s, bx = 14, by = H - 22;
-  ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = 2;
-  ctx.beginPath(); ctx.moveTo(bx, by-6); ctx.lineTo(bx, by); ctx.lineTo(bx+px, by); ctx.lineTo(bx+px, by-6); ctx.stroke();
-  for(let i=1;i<5;i++){ ctx.beginPath(); ctx.moveTo(bx + px*i/5, by); ctx.lineTo(bx + px*i/5, by-3); ctx.stroke() }
-  ctx.font = `500 12px "IBM Plex Mono",ui-monospace,monospace`; ctx.textBaseline = "middle";
-  ctx.fillText(fmtLen(L), bx + px + 8, by - 2);
+  const bx = 14, by = H - 22;
+  if(revealing){
+    const L = niceLen((W*0.28) / s), px = L * s;
+    ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(bx, by-6); ctx.lineTo(bx, by); ctx.lineTo(bx+px, by); ctx.lineTo(bx+px, by-6); ctx.stroke();
+    for(let i=1;i<5;i++){ ctx.beginPath(); ctx.moveTo(bx + px*i/5, by); ctx.lineTo(bx + px*i/5, by-3); ctx.stroke() }
+    ctx.font = `500 12px "IBM Plex Mono",ui-monospace,monospace`; ctx.textBaseline = "middle";
+    ctx.fillText(fmtLen(L), bx + px + 8, by - 2);
+  }
   if(game.phase==="play"){
     ctx.textAlign = "right"; ctx.globalAlpha = .6; ctx.font = `500 12px "IBM Plex Sans Thai",system-ui,sans-serif`;
     ctx.fillText("ลากซ้าย–ขวาเพื่อปรับขนาด", W - 12, by - 2); ctx.globalAlpha = 1; ctx.textAlign = "left";
@@ -543,7 +679,7 @@ function setP(patch){
 }
 function validG(g){
   return g && typeof g==="object" && typeof g.v==="number" && typeof g.phase==="string" && typeof g.seed==="number" &&
-    [5,10].includes(g.n) && Array.isArray(g.order) && g.names && typeof g.names==="object" && g.ans && typeof g.ans==="object";
+    [5,10,20].includes(g.n) && Array.isArray(g.order) && g.names && typeof g.names==="object" && g.ans && typeof g.ans==="object";
 }
 function newLobby(n){ return {v:1, phase:"lobby", seed:randSeed(), n: n || 5, i:0, order:[], names:{}, ans:{}} }
 function present(){
@@ -685,7 +821,8 @@ function setHTML(id, html){
 function renderReadout(){
   const el = $("readout"); if(!el || !game) return;
   const {B} = cur();
-  el.innerHTML = `<b>${esc(fmtLen(game.guess))}</b><div>${esc(B[0])} ${DIMWORD[B[2]]}ประมาณนี้</div>`;
+  // no numbers while guessing: the picture is the only clue
+  el.innerHTML = `<b style="font-family:var(--f-display)">${esc(B[0])}</b><div>ลากหรือกด − + ให้ขนาดดูเหมือนของจริง</div>`;
 }
 function question(){
   const {B} = cur();
@@ -712,7 +849,7 @@ function renderBar(done, sum, max){
 function renderSolo(){
   if(!game || game.seed==null || game.i < 0) { newGame(challenge ? challenge.seed : randSeed(), challenge ? challenge.n : roundsPref); return }
   setHTML("len-pick", challenge ? "" :
-    `<span class="sub">จำนวนข้อ</span><div class="seg" role="group">${[5,10].map(n => `<button data-act="len" data-n="${n}" aria-pressed="${game.n===n}">${n}</button>`).join("")}</div>`);
+    `<span class="sub">จำนวนข้อ</span><div class="seg" role="group">${[5,10,20].map(n => `<button data-act="len" data-n="${n}" aria-pressed="${game.n===n}">${n}</button>`).join("")}</div>`);
   setHTML("top", challenge ? `<div class="banner"><b>${esc(challenge.name)} ท้าคุณ</b><span>ได้ ${challenge.scores.reduce((a,b)=>a+b,0)} / ${challenge.n*100} คะแนน ทายชุดเดียวกัน ${challenge.n} ข้อ</span></div>` : "");
   $("sheet").hidden = false; $("strip").hidden = true;
   const done = game.scores.length, sum = game.scores.reduce((a,b)=>a+b,0);
@@ -802,7 +939,7 @@ function lobbyHTML(pr){
     <div class="row"><button class="hot" data-act="copyinvite">คัดลอกลิงก์เชิญ</button></div>
     <h2>ผู้เล่น (${G.order.length})</h2>
     <div class="row">${G.order.map(id => `<span class="chip${id===pid?" me":""}">${esc(nameOf(id))}${id===hostPid?" · หัวห้อง":""}</span>`).join("")}</div>
-    <div class="field"><label>จำนวนข้อ</label><div class="seg" role="group">${[5,10].map(n => `<button data-act="room-n" data-n="${n}" aria-pressed="${G.n===n}"${isHost?"":" disabled"}>${n} ข้อ</button>`).join("")}</div></div>
+    <div class="field"><label>จำนวนข้อ</label><div class="seg" role="group">${[5,10,20].map(n => `<button data-act="room-n" data-n="${n}" aria-pressed="${G.n===n}"${isHost?"":" disabled"}>${n} ข้อ</button>`).join("")}</div></div>
     ${isHost ? `<div class="row"><button class="hot" data-act="start">เริ่มเกม</button>${G.order.length<2?'<span class="note">รอเพื่อนเข้าห้องก่อนก็ได้</span>':""}</div>` : '<p class="note" style="margin:0">รอหัวห้องกดเริ่มเกม</p>'}
   </section>`;
 }
@@ -856,7 +993,7 @@ function renderOnline(){
   if(game.phase==="play") setHTML("below", controlsHTML());
   else if(game.phase==="wait"){
     const waiting = here.filter(id => !answered(pr.get(id).p.ans, G));
-    setHTML("below", `<div class="waitbox"><div><b>ล็อกแล้ว: ${esc(fmtLen(game.guess))}</b></div>
+    setHTML("below", `<div class="waitbox"><div><b>ล็อกคำตอบแล้ว</b></div>
       <div class="note">${waiting.length ? "รอ " + waiting.map(id => esc(nameOf(id))).join(", ") + " ตอบ" : "ครบแล้ว กำลังเฉลย…"}</div>
       ${isHost && waiting.length ? '<div class="row"><button data-act="force-reveal">ไม่รอแล้ว เฉลยเลย</button></div>' : ""}</div>`);
   } else if(game.phase==="reveal"){
@@ -906,7 +1043,7 @@ document.addEventListener("click", e => {
   else if(a==="copycode"){
     (navigator.clipboard?.writeText(roomCode) || Promise.reject()).then(() => toast("คัดลอกรหัส " + roomCode + " แล้ว")).catch(() => toast("รหัสห้องคือ " + roomCode));
   }
-  else if(a==="room-n") hostDo(g => { if(g.phase==="lobby") g.n = +b.dataset.n===10 ? 10 : 5 });
+  else if(a==="room-n") hostDo(g => { if(g.phase==="lobby") { const n = +b.dataset.n; g.n = [5,10,20].includes(n) ? n : 5 } });
   else if(a==="start") hostDo((g, pr) => {
     g.order = g.order.filter(id => pr.has(id)); g.seed = randSeed(); g.i = 0; g.ans = {}; g.phase = "play";
   });
