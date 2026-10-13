@@ -165,10 +165,10 @@ const ITEMS = [
  ["แผ่นซีดี","💿","D",0.12,"มาตรฐานแผ่นซีดี เส้นผ่านศูนย์กลาง 120 มม."],
  ["เต่าทะเลสีเขียว","🐢","L",1,"กระดองตัวเต็มวัยยาว 78–112 ซม."],
  ["ที-เร็กซ์","🦖","L",12.3,"ฟอสซิลชื่อซู ยาว 12.3 ม."],
- ["บราคิโอซอรัส","🦕","L",22,"ประเมินจากฟอสซิล ยาวราว 18–22 ม."],
- ["จระเข้น้ำเค็มตัวผู้","🐊","L",4.5,"ตัวผู้โตเต็มวัยยาว 4.1–5.5 ม."],
+ ["บราคิโอซอรัส (ชูคอ)","🦕","H",12,"ชูคอสูงถึงหัวราว 12–13 ม. (ประเมินจากฟอสซิล)"],
+ ["เรือใบออปติมิสต์","⛵","L",2.31,"เรือใบเด็กมาตรฐานโลก ลำเรือยาว 2.31 ม."],
  ["ฉลามขาว","🦈","L",4.2,"ตัวเมีย 4.6–4.9 ม. ตัวผู้ 3.4–4 ม. (สถาบันสมิธโซเนียน)"],
- ["โลมาปากขวด","🐬","L",2.5,"ตัวเต็มวัยยาว 2–4 ม."],
+ ["โลมาปากขวด","🐬","H",2.5,"ตัวเต็มวัยยาว 2–4 ม."],
  ["เพนกวินจักรพรรดิ","🐧","H",1.1,"สูงได้ถึงราว 1.2 ม."],
  ["กอริลลาตัวผู้","🦍","H",1.7,"ยืนตรงสูงราว 1.7–1.8 ม."],
  ["ผึ้งงาน","🐝","L",0.013,"ผึ้งพันธุ์ตัวงานยาว 12–15 มม."],
@@ -182,7 +182,7 @@ const ITEMS = [
  ["แรดขาว","🦏","L",3.8,"ตัวเต็มวัยยาว 3.7–4 ม."],
  ["ฮิปโป","🦛","L",4,"ตัวเต็มวัยยาว 3.3–5 ม."],
  ["ม้าลาย","🦓","L",2.3,"ม้าลายทุ่งราบยาว 2.2–2.5 ม."],
- ["จิงโจ้แดงตัวผู้","🦘","H",1.5,"ยืนท่าปกติสูง 1.5–1.8 ม."],
+ ["จิงโจ้แดงตัวผู้ (ท่ากระโดด รวมหาง)","🦘","L",2.4,"ลำตัว 1.3–1.6 ม. หาง 1–1.2 ม."],
  ["วาฬหลังค่อม","🐳","L",14,"ตัวเต็มวัยยาว 12–16 ม."],
  ["ปลาทู","🐟","L",0.18,"ปลาทูที่ขายทั่วไปยาว 15–20 ซม."],
  ["หนอนผีเสื้อโมนาร์ก","🐛","L",0.045,"โตเต็มที่ยาวราว 4.5 ซม."],
@@ -226,11 +226,11 @@ const ITEMS = [
  ["สกังก์ลาย (รวมหาง)","🦨","L",0.68,"ยาวรวมหาง 57–80 ซม."],
  ["แบดเจอร์ยุโรป","🦡","L",0.8,"ยาวลำตัว 60–90 ซม."],
  ["หนูท่อ (รวมหาง)","🐀","L",0.43,"ลำตัว 20–25 ซม. หาง 18–25 ซม."],
- ["ตุ๊กแกบ้าน","🦎","L",0.3,"ยาวรวมหาง 25–35 ซม."],
- ["แมงป่องช้าง","🦂","L",0.12,"ยาว 10–15 ซม."],
+ ["ตุ๊กแกบ้าน","🦎","H",0.3,"ยาวรวมหาง 25–35 ซม."],
+ ["แมงป่องช้าง","🦂","H",0.12,"ยาว 10–15 ซม."],
  ["จิ้งหรีดทองดำ","🦗","L",0.027,"ยาว 2.5–3 ซม."],
  ["เต่าทองเจ็ดจุด","🐞","H",0.007,"ยาว 5–8 มม."],
- ["แมลงวันบ้าน","🪰","L",0.007,"ยาว 6–7 มม."],
+ ["แมลงวันบ้าน","🪰","H",0.007,"ยาว 6–7 มม."],
  ["ยุงลาย","🦟","L",0.005,"ยาวราว 4–7 มม."],
  ["แมลงสาบอเมริกัน","🪳","H",0.038,"ยาว 3.5–4 ซม."],
  ["ปูทะเล (กว้างรวมก้าม)","🦀","D",0.2,"กระดองกว้าง 15–20 ซม."],
@@ -247,7 +247,7 @@ const ITEMS = [
  ["อุรังอุตังตัวผู้","🦧","H",1.37,"ยืนสูง 1.2–1.5 ม."],
  ["ช้างเอเชีย","🐘","H",2.7,"สูงที่ไหล่ 2.5–3 ม."],
  ["วาฬบรูด้า (พบในอ่าวไทย)","🐋","L",13,"ตัวเต็มวัยยาว 12–15 ม."],
- ["โลมาอิรวดี","🐬","L",2.3,"ยาว 2–2.75 ม."],
+ ["โลมาอิรวดี","🐬","H",2.3,"ยาว 2–2.75 ม."],
  ["ฉลามวาฬ","🦈","L",10,"ตัวเต็มวัยทั่วไปยาว 8–12 ม."],
  ["แท็กซี่ (โตโยต้า โคโรลล่า อัลติส)","🚕","L",4.63,"ยาว 4.63 ม."],
  ["รถตู้ (โตโยต้า คอมมิวเตอร์)","🚐","L",5.38,"ยาว 5.38 ม."],
@@ -304,7 +304,7 @@ const ITEMS = [
  ["สมุดขนาด A5","📓","H",0.21,"สูง 210 มม."],
  ["กระดาษ A4","📄","H",0.297,"สูง 297 มม."],
  ["ซองจดหมาย DL","✉️","L",0.22,"ยาว 220 มม."],
- ["กระดาษชำระม้วน","🧻","H",0.1,"สูงราว 10 ซม."],
+ ["กระดาษชำระม้วน","🧻","L",0.1,"สูงราว 10 ซม."],
  ["ลูกเต๋า","🎲","D",0.016,"ลูกเต๋ามาตรฐาน 16 มม."],
  ["โยโย่","🪀","D",0.056,"กว้างราว 5.6 ซม."],
  ["รถเข็นซูเปอร์มาร์เก็ต","🛒","L",0.95,"ยาว 90–100 ซม."],
@@ -338,25 +338,29 @@ function scoreFor(guess, truth){
   return 0;
 }
 function pctOff(g, t){ const p = (g/t - 1) * 100; return (p>=0 ? "+" : "−") + sig(Math.abs(p)) + "%" }
+// Kept in ITEMS so ids stay stable, but never drawn: the emoji's pose does not match how the size is measured.
+const EXCLUDED = new Set(["แมวบ้าน (รวมหาง)","ที-เร็กซ์","กอริลลาตัวผู้","กระรอกเทา (รวมหาง)","บีเวอร์ (รวมหาง)","อุรังอุตังตัวผู้","ยุงลาย","โซฟา 3 ที่นั่ง","ทีวี 55 นิ้ว","กระดานปาเป้า"]);
+const POOL = ITEMS.map((_, i) => i).filter(i => !EXCLUDED.has(ITEMS[i][0]));
+const MAX_RATIO = 12; // beyond this the smaller picture shrinks to a dot
 function makePairs(seed, n){
   const r = rng(seed), out = [], used = new Set();
   let guard = 0;
-  while(out.length < n && guard++ < 5000){
-    const a = Math.floor(r()*ITEMS.length), b = Math.floor(r()*ITEMS.length);
+  while(out.length < n && guard++ < 20000){
+    const a = POOL[Math.floor(r()*POOL.length)], b = POOL[Math.floor(r()*POOL.length)];
     if(a===b || used.has(b)) continue;
     const ratio = ITEMS[a][3] / ITEMS[b][3];
-    if(ratio > 50 || ratio < 1/50 || (ratio < 1.15 && ratio > 1/1.15)) continue;
+    if(ratio > MAX_RATIO || ratio < 1/MAX_RATIO || (ratio < 1.15 && ratio > 1/1.15)) continue;
     used.add(b); out.push([a,b]);
   }
   return out;
 }
-// challenge link: #c.<n>.<seed36>.<scores 2-char base36 each>.<name utf8 hex>
+// challenge link: #d.<n>.<seed36>.<scores 2-char base36 each>.<name utf8 hex>  ("c." links used the older pairing rules)
 function encodeChallenge(seed, scores, name){
   const hex = Array.from(new TextEncoder().encode(name.slice(0,12))).map(b => b.toString(16).padStart(2,"0")).join("");
-  return `c.${scores.length}.${seed.toString(36)}.${scores.map(s => s.toString(36).padStart(2,"0")).join("")}.${hex}`;
+  return `d.${scores.length}.${seed.toString(36)}.${scores.map(s => s.toString(36).padStart(2,"0")).join("")}.${hex}`;
 }
 function decodeChallenge(h){
-  const m = /^c\.(\d{1,2})\.([0-9a-z]{1,8})\.([0-9a-z]*)\.([0-9a-f]*)$/.exec(h || "");
+  const m = /^d\.(\d{1,2})\.([0-9a-z]{1,8})\.([0-9a-z]*)\.([0-9a-f]*)$/.exec(h || "");
   if(!m) return null;
   const n = +m[1], seed = parseInt(m[2],36);
   if(![5,10,20].includes(n) || m[3].length !== n*2 || m[4].length % 2) return null;
@@ -514,8 +518,6 @@ function frame(now){
   if(cv.width !== Math.round(W*dpr) || cv.height !== Math.round(H*dpr)){ cv.width = Math.round(W*dpr); cv.height = Math.round(H*dpr) }
   ctx.setTransform(dpr,0,0,dpr,0,0);
   ctx.fillStyle = cssVars.board; ctx.fillRect(0,0,W,H);
-  ctx.strokeStyle = cssVars.grid; ctx.lineWidth = 1; ctx.beginPath();
-  for(let x=0.5;x<W;x+=24){ ctx.moveTo(x,0); ctx.lineTo(x,H) } for(let y=0.5;y<H;y+=24){ ctx.moveTo(0,y); ctx.lineTo(W,y) } ctx.stroke();
 
   const {A, B} = cur(), ink = cssVars["board-ink"], revealing = game.phase==="reveal";
   const showGuess = !(revealing && game.noGuess);
@@ -523,15 +525,15 @@ function frame(now){
   let rt = 0;
   if(revealing){ const t = reduceMotion ? 1 : Math.min(1, (now - game.revealStart) / 900); rt = 1 - Math.pow(1-t, 3) }
   const truthShown = revealing ? Math.exp(Math.log(from) + (Math.log(B[3]) - Math.log(from)) * rt) : null;
-  const ground = H - 58, top = revealing ? 84 : 52, gap = 30, margin = 22;
+  // plot area: x from 0 (left edge of the reference) along the ground, y axis on the right edge
+  const ground = H - 50, top = revealing ? 84 : 52, gap = 30, margin = 22, axisX = W - 52;
   const dA = dims(A, A[3]), dG = showGuess ? dims(B, game.guess) : {w:0,h:0}, dT = revealing ? dims(B, B[3]) : {w:0,h:0};
   const rightW = Math.max(dG.w, dT.w), rightH = Math.max(dG.h, dT.h);
-  const target = Math.min((W - 2*margin - gap) / (dA.w + rightW), (ground - top) / Math.max(dA.h, rightH));
+  const target = Math.min((axisX - 14 - 2*margin - gap) / (dA.w + rightW), (ground - top) / Math.max(dA.h, rightH));
   scaleNow = scaleNow == null ? target : Math.exp(Math.log(scaleNow) + (Math.log(target) - Math.log(scaleNow)) * 0.22);
   const s = scaleNow;
-  const total = (dA.w + rightW) * s + gap, xA = (W - total) / 2, xB = xA + dA.w*s + gap;
-
-  ctx.strokeStyle = ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(0, ground+1); ctx.lineTo(W, ground+1); ctx.stroke();
+  const total = (dA.w + rightW) * s + gap, xA = margin + ((axisX - 14 - 2*margin) - total) / 2, xB = xA + dA.w*s + gap;
+  drawAxes(s, xA, ground, axisX, W, H, ink);
   // reference: the real picture at true scale; no numbers until the reveal
   const ra = drawSil(A, A[3], xA, ground, s, {photo:true, shadow:true});
   let g = {w:0, h:0};
@@ -551,19 +553,47 @@ function frame(now){
     nameTag("จริง " + fmtLen(B[3]), cx, topY, cssVars.truth, cssVars.board);
     if(showGuess) nameTag("คุณทาย " + fmtLen(game.guess), cx, topY - 30, ink, cssVars.board);
   }
-  const bx = 14, by = H - 22;
-  if(revealing){
-    const L = niceLen((W*0.28) / s), px = L * s;
-    ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(bx, by-6); ctx.lineTo(bx, by); ctx.lineTo(bx+px, by); ctx.lineTo(bx+px, by-6); ctx.stroke();
-    for(let i=1;i<5;i++){ ctx.beginPath(); ctx.moveTo(bx + px*i/5, by); ctx.lineTo(bx + px*i/5, by-3); ctx.stroke() }
-    ctx.font = `500 12px "IBM Plex Mono",ui-monospace,monospace`; ctx.textBaseline = "middle";
-    ctx.fillText(fmtLen(L), bx + px + 8, by - 2);
-  }
   if(game.phase==="play"){
-    ctx.textAlign = "right"; ctx.globalAlpha = .6; ctx.font = `500 12px "IBM Plex Sans Thai",system-ui,sans-serif`;
-    ctx.fillText("ลากซ้าย–ขวาเพื่อปรับขนาด", W - 12, by - 2); ctx.globalAlpha = 1; ctx.textAlign = "left";
+    ctx.fillStyle = ink; ctx.textAlign = "left"; ctx.textBaseline = "top"; ctx.globalAlpha = .6; ctx.font = `500 12px "IBM Plex Sans Thai",system-ui,sans-serif`;
+    ctx.fillText("ลากซ้าย–ขวาเพื่อปรับขนาด", 10, 8); ctx.globalAlpha = 1;
   }
+}
+// Real-world axes: x along the ground from the reference's left edge, y up the right edge, grid on the same scale.
+function axisUnit(step){ return step < 0.01 ? ["มม.", 1000] : step < 1 ? ["ซม.", 100] : step < 1000 ? ["ม.", 1] : ["กม.", 0.001] }
+function drawAxes(s, x0, ground, axisX, W, H, ink){
+  const span = Math.max((axisX - x0) / s, (ground - 10) / s);
+  const step = niceLen(span / 6), px = step * s;
+  const [unit, mul] = axisUnit(step);
+  const lab = v => Number((v * mul).toPrecision(6)).toLocaleString("th-TH", {maximumFractionDigits: 3});
+  const minor = px >= 50 ? step / 5 : px >= 26 ? step / 2 : 0;
+  ctx.save();
+  ctx.lineWidth = 1;
+  const grid = (st, alpha) => {
+    ctx.globalAlpha = alpha; ctx.strokeStyle = cssVars.grid; ctx.beginPath();
+    for(let k = Math.ceil(-x0 / (st * s)); x0 + k*st*s < axisX; k++){ const x = Math.round(x0 + k*st*s) + .5; ctx.moveTo(x, 0); ctx.lineTo(x, ground) }
+    for(let k = 1; ground - k*st*s > 0; k++){ const y = Math.round(ground - k*st*s) + .5; ctx.moveTo(0, y); ctx.lineTo(axisX, y) }
+    ctx.stroke();
+  };
+  if(minor) grid(minor, .45);
+  ctx.lineWidth = 1.3; grid(step, 1);
+  ctx.globalAlpha = 1; ctx.strokeStyle = ink; ctx.fillStyle = ink; ctx.lineWidth = 2;
+  ctx.beginPath(); ctx.moveTo(0, ground + 1); ctx.lineTo(axisX, ground + 1); ctx.moveTo(axisX, ground + 1); ctx.lineTo(axisX, 4); ctx.stroke();
+  ctx.font = `500 11px "IBM Plex Mono",ui-monospace,monospace`; ctx.lineWidth = 1.5;
+  // x axis
+  ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for(let k = 0; x0 + k*px <= axisX - 18; k++){
+    const x = x0 + k*px; ctx.beginPath(); ctx.moveTo(x, ground + 1); ctx.lineTo(x, ground + 7); ctx.stroke();
+    ctx.fillText(lab(k*step), x, ground + 10);
+  }
+  // y axis
+  ctx.textAlign = "left"; ctx.textBaseline = "middle";
+  for(let k = 0; ground - k*px >= 10; k++){
+    const y = ground - k*px; ctx.beginPath(); ctx.moveTo(axisX, y); ctx.lineTo(axisX + 6, y); ctx.stroke();
+    ctx.fillText(lab(k*step), axisX + 9, y);
+  }
+  ctx.font = `600 12px "IBM Plex Sans Thai",system-ui,sans-serif`; ctx.textAlign = "right"; ctx.textBaseline = "bottom";
+  ctx.fillText("หน่วย: " + unit, W - 8, H - 6);
+  ctx.restore();
 }
 
 // ---------- input ----------
@@ -598,7 +628,7 @@ const BROKERS = ["wss://broker.emqx.io:8084/mqtt", "wss://broker.hivemq.com:8884
 const STALE_MS = 120000, BEAT_MS = 25000;
 function mqttRoom(code){
   return new Promise((resolve, reject) => {
-    const base = "tbsz/v2/" + code.toLowerCase() + "/p/";
+    const base = "tbsz/v3/" + code.toLowerCase() + "/p/";
     const me = "c" + Math.random().toString(36).slice(2, 12);
     const entries = new Map(), clients = [], peerCbs = [], connCbs = [];
     let pres = {}, seq = 0, list = [], resolved = false, connected = false, pubTimer = null, left = false;
