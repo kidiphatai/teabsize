@@ -1055,6 +1055,14 @@ document.addEventListener("click", e => {
 let toastT;
 function toast(msg){ const t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, 2600) }
 window.addEventListener("hashchange", () => {
+  const inv = /^r\.([A-Za-z0-9]{4,6})$/.exec(location.hash.slice(1));
+  if(inv){
+    history.replaceState(null, "", location.pathname + location.search);
+    if(R) return;
+    mode = "online"; game = null; htmlCache.clear(); renderUI();
+    const el = document.getElementById("in-code"); if(el) el.value = inv[1].toUpperCase();
+    return;
+  }
   const c = decodeChallenge(location.hash.slice(1));
   if(c){ if(R) leaveRoom(); challenge = c; mode = "solo"; htmlCache.clear(); newGame(c.seed, c.n) }
 });
