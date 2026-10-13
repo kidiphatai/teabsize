@@ -116,7 +116,7 @@ tfoot td{font-weight:600;border-bottom:0;border-top:1.5px solid var(--ink)}
 body{margin:0}
 img{max-width:100%}
 </style>
-<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js"></script>
 </head>
 <body>
 
@@ -454,68 +454,78 @@ document.addEventListener("keydown", e => {
   } else if(game.phase==="reveal" && e.key==="Enter"){ e.preventDefault(); document.querySelector('[data-act="next"],[data-act="ready"]')?.click() }
 });
 
-// ---------- PeerJS transport: the room creator owns peer id tbsz-v1-<code>, everyone else connects to it ----------
-function peerRoom(code, create){
+// ---------- MQTT relay transport ----------
+// Every player publishes one retained presence message per room on each public broker it can reach,
+// and subscribes to everyone else's. Talking through brokers works behind any NAT or mobile network.
+// Using several brokers at once means two players meet as long as they share any one of them.
+const BROKERS = ["wss://broker.emqx.io:8084/mqtt", "wss://broker.hivemq.com:8884/mqtt", "wss://test.mosquitto.org:8081/mqtt"];
+const STALE_MS = 120000, BEAT_MS = 25000;
+function mqttRoom(code){
   return new Promise((resolve, reject) => {
-    const roomId = "tbsz-v1-" + code.toLowerCase();
-    let peer, me = null, hostConn = null, connected = false, opened = false, list = [], pres = {}, flush = false;
-    const conns = new Map(), peerCbs = [], connCbs = [], lostCbs = [];
-    const emitPeers = () => { const c = {peers: list}; peerCbs.forEach(f => { try{ f(c) }catch(e){ console.error(e) } }) };
-    const setConn = v => { connected = v; connCbs.forEach(f => f(v)) };
+    const base = "tbsz/v2/" + code.toLowerCase() + "/p/";
+    const me = "c" + Math.random().toString(36).slice(2, 12);
+    const entries = new Map(), clients = [], peerCbs = [], connCbs = [];
+    let pres = {}, seq = 0, list = [], resolved = false, connected = false, pubTimer = null, left = false;
     function rebuild(){
-      list = [{peer: roomId, sameTab: true, presence: pres, updatedAt: Date.now()}]
-        .concat([...conns].map(([id, e]) => ({peer: id, sameTab: false, presence: e.p, updatedAt: e.t})));
-      emitPeers();
-      if(flush) return; flush = true;
-      queueMicrotask(() => {
-        flush = false;
-        const msg = {t: "peers", list: list.map(x => ({peer: x.peer, presence: x.presence, updatedAt: x.updatedAt}))};
-        for(const [, e] of conns){ try{ if(e.c.open) e.c.send(msg) }catch(err){} }
+      list = [{peer: me, sameTab: true, presence: pres, updatedAt: Date.now()}]
+        .concat([...entries].map(([id, e]) => ({peer: id, sameTab: false, presence: e.p, updatedAt: e.u})));
+      peerCbs.forEach(f => { try{ f({peers: list}) }catch(e){ console.error(e) } });
+    }
+    const payload = () => JSON.stringify({ts: Date.now(), s: seq, p: pres});
+    function publish(){ seq++; const m = payload(); clients.forEach(c => { if(c.connected) c.publish(base + me, m, {retain: true, qos: 0}) }) }
+    function schedulePub(){ if(pubTimer) return; pubTimer = setTimeout(() => { pubTimer = null; if(!left) publish() }, 60) }
+    function updConn(){ const v = clients.some(c => c.connected); if(v !== connected){ connected = v; connCbs.forEach(f => f(v)) } }
+    for(const url of BROKERS){
+      let c;
+      try{
+        c = mqtt.connect(url, {clientId: me + Math.random().toString(36).slice(2, 6), clean: true, reconnectPeriod: 4000,
+          connectTimeout: 9000, keepalive: 20, will: {topic: base + me, payload: "", retain: true, qos: 0}});
+      }catch(e){ continue }
+      clients.push(c);
+      c.on("connect", () => {
+        c.subscribe(base + "+");
+        c.publish(base + me, payload(), {retain: true, qos: 0});
+        updConn();
+        if(!resolved){ resolved = true; resolve(api) }
+      });
+      c.on("close", updConn); c.on("offline", updConn); c.on("error", () => {});
+      c.on("message", (topic, buf) => {
+        const id = topic.slice(base.length);
+        if(!id || id === me || !topic.startsWith(base)) return;
+        const txt = buf.toString();
+        if(!txt){ if(entries.delete(id)) rebuild(); return }
+        let m; try{ m = JSON.parse(txt) }catch(e){ return }
+        if(!m || typeof m !== "object" || !m.p || typeof m.p !== "object" || typeof m.ts !== "number") return;
+        if(Date.now() - m.ts > STALE_MS) return;
+        const prev = entries.get(id);
+        if(prev && (prev.ts > m.ts || (prev.ts === m.ts && prev.s >= m.s))) return;
+        const changed = !prev || JSON.stringify(prev.p) !== JSON.stringify(m.p);
+        entries.set(id, {p: m.p, ts: m.ts, s: m.s, u: changed ? Date.now() : prev.u});
+        if(changed) rebuild();
       });
     }
+    const beat = setInterval(() => { if(!left) publish() }, BEAT_MS);
+    const prune = setInterval(() => {
+      let ch = false; const now = Date.now();
+      for(const [id, e] of entries) if(now - e.ts > STALE_MS){ entries.delete(id); ch = true }
+      if(ch) rebuild();
+    }, 10000);
+    const bye = () => { clients.forEach(c => { try{ if(c.connected) c.publish(base + me, "", {retain: true, qos: 0}) }catch(e){} }) };
+    window.addEventListener("pagehide", bye);
     const api = {
       presence(patch){
-        for(const k in patch){ if(patch[k]===null) delete pres[k]; else pres[k] = patch[k] }
-        if(create) rebuild();
-        else if(hostConn && hostConn.open){ try{ hostConn.send({t: "p", p: pres}) }catch(e){} }
-        return Promise.resolve();
+        for(const k in patch){ if(patch[k] === null) delete pres[k]; else pres[k] = patch[k] }
+        rebuild(); schedulePub(); return Promise.resolve();
       },
       onPeers(f){ peerCbs.push(f); return () => {} },
       onConnection(f){ connCbs.push(f); setTimeout(() => f(connected), 0); return () => {} },
-      onHostLost(f){ lostCbs.push(f) },
       peers(){ return list },
-      async leave(){ lostCbs.length = 0; try{ peer && peer.destroy() }catch(e){} }
+      async leave(){
+        left = true; clearInterval(beat); clearInterval(prune); window.removeEventListener("pagehide", bye);
+        bye(); setTimeout(() => clients.forEach(c => { try{ c.end(true) }catch(e){} }), 400);
+      }
     };
-    const fail = code => { if(!opened){ opened = true; try{ peer && peer.destroy() }catch(e){} reject({code}) } };
-    setTimeout(() => fail("timeout"), 15000);
-    if(create){
-      peer = new Peer(roomId);
-      peer.on("open", () => { opened = true; me = roomId; rebuild(); setConn(true); resolve(api) });
-      peer.on("connection", c => {
-        c.on("open", () => { conns.set(c.peer, {c, p: {}, t: Date.now()}); rebuild() });
-        c.on("data", d => { if(d && d.t==="p" && d.p && typeof d.p==="object"){ const e = conns.get(c.peer); if(e){ e.p = d.p; e.t = Date.now(); rebuild() } } });
-        c.on("close", () => { conns.delete(c.peer); rebuild() });
-        c.on("error", () => {});
-      });
-      peer.on("disconnected", () => { try{ peer.reconnect() }catch(e){} });
-      peer.on("error", e => fail(e.type==="unavailable-id" ? "taken" : e.type));
-    } else {
-      peer = new Peer();
-      peer.on("open", id => {
-        me = id;
-        hostConn = peer.connect(roomId, {reliable: true});
-        hostConn.on("open", () => { opened = true; setConn(true); try{ hostConn.send({t: "p", p: pres}) }catch(e){} resolve(api) });
-        hostConn.on("data", d => {
-          if(d && d.t==="peers" && Array.isArray(d.list)){
-            list = d.list.map(x => ({peer: String(x.peer), sameTab: x.peer===me, presence: (x.presence && typeof x.presence==="object") ? x.presence : {}, updatedAt: +x.updatedAt || 0}));
-            emitPeers();
-          }
-        });
-        hostConn.on("close", () => { setConn(false); if(opened) lostCbs.forEach(f => f()) });
-        hostConn.on("error", () => {});
-      });
-      peer.on("error", e => { if(e.type==="peer-unavailable") fail("no-room"); else if(!opened) fail(e.type); else if(e.type==="network" || e.type==="server-error") setConn(false) });
-    }
+    setTimeout(() => { if(!resolved){ resolved = true; left = true; clearInterval(beat); clearInterval(prune); clients.forEach(c => { try{ c.end(true) }catch(e){} }); reject({code: "timeout"}) } }, 12000);
   });
 }
 
@@ -562,7 +572,7 @@ function recompute(){
   }
 }
 setInterval(() => {
-  return; // a PeerJS room lives on the creator's browser, so nobody else can take it over
+  if(!R || G || !noHostSince || Date.now() - noHostSince < 3000) return;
   const cands = peers.filter(p => pres(p).pid).map(p => p.peer).sort();
   const mine = peers.find(p => p.sameTab);
   if(!mine || !cands.length || cands[0]===mine.peer){
@@ -632,19 +642,13 @@ async function joinRoom(code, create){
   if(!code){ toast("ใส่รหัสห้องก่อน"); return }
   myName = n; sset("ts_name", n);
   busy = true; renderUI();
-  for(let attempt = 0; ; attempt++){
-    try{ R = await roomApi.join(code, create); break }
-    catch(e){
-      if(create && e && e.code==="taken" && attempt < 4){ code = makeCode(); continue }
-      R = null; busy = false;
-      toast(e && e.code==="no-room" ? "ไม่พบห้อง " + code + " เช็กรหัสอีกครั้ง หรือหัวห้องอาจปิดหน้าไปแล้ว" :
-            e && e.code==="timeout" ? "เชื่อมต่อไม่ทันเวลา ลองอีกครั้ง หรือลองเปลี่ยนเครือข่าย" :
-            "เข้าห้องไม่ได้ (" + (e && e.code || "error") + ") ลองใหม่อีกครั้ง");
-      renderUI(); return;
-    }
+  try{ R = await roomApi.join(code) }
+  catch(e){
+    R = null; busy = false;
+    toast(e && e.code==="timeout" ? "ต่อเซิร์ฟเวอร์เกมไม่ได้ ลองรีเฟรช หรือเปลี่ยนเป็นเน็ตมือถือ" : "เข้าห้องไม่ได้ (" + (e && e.code || "error") + ") ลองใหม่อีกครั้ง");
+    renderUI(); return;
   }
-  busy = false; roomCode = code; sset("ts_room", create ? null : code, "sessionStorage");
-  R.onHostLost(() => { toast("หัวห้องออกจากห้องแล้ว เกมนี้จบลง"); leaveRoom() });
+  busy = false; roomCode = code; sset("ts_room", code, "sessionStorage");
   myP = {}; G = null; lastG = null; isHost = false; noHostSince = Date.now(); peers = R.peers(); game = null;
   const base = {pid, name: myName};
   if(create) Object.assign(base, {host:true, g:newLobby(roundsPref)});
@@ -794,7 +798,7 @@ function roomLine(){
 function lobbyHTML(pr){
   return `<section class="panel"><span class="k">รหัสห้อง</span>
     <div class="row"><span class="code">${esc(roomCode)}</span><button data-act="copycode">คัดลอกรหัส</button><button class="ghost" data-act="leave">ออกจากห้อง</button></div>
-    <p class="note" style="margin:0">ส่งลิงก์เชิญให้เพื่อน เปิดแล้วใส่ชื่อกดเข้าห้องได้เลย ห้องอยู่บนเครื่องหัวห้อง อย่าปิดหน้านี้ระหว่างเล่น</p>
+    <p class="note" style="margin:0">ส่งลิงก์เชิญให้เพื่อน เปิดแล้วใส่ชื่อกดเข้าห้องได้เลย ถ้าหัวห้องหลุด คนอื่นในห้องจะรับเป็นหัวห้องต่อให้เอง</p>
     <div class="row"><button class="hot" data-act="copyinvite">คัดลอกลิงก์เชิญ</button></div>
     <h2>ผู้เล่น (${G.order.length})</h2>
     <div class="row">${G.order.map(id => `<span class="chip${id===pid?" me":""}">${esc(nameOf(id))}${id===hostPid?" · หัวห้อง":""}</span>`).join("")}</div>
@@ -926,7 +930,7 @@ renderUI();
 requestAnimationFrame(frame);
 document.fonts && document.fonts.ready.then(() => { scaleNow = null });
 (async () => {
-  roomApi = typeof Peer === "function" ? {join: peerRoom} : null;
+  roomApi = typeof mqtt === "object" && mqtt && typeof mqtt.connect === "function" ? {join: mqttRoom} : null;
   const inv = /^r\.([A-Za-z0-9]{4,6})$/.exec(location.hash.slice(1));
   if(inv){ mode = "online"; game = null; htmlCache.clear(); history.replaceState(null, "", location.pathname + location.search); renderUI(); const el = document.getElementById("in-code"); if(el) el.value = inv[1].toUpperCase() }
   roomReady = roomApi ? "ready" : "none"; htmlCache.delete("top"); renderUI();
